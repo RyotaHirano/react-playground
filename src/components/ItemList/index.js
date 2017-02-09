@@ -4,7 +4,8 @@ import Item from '../Item'
 
 const ItemList = props => {
   const {
-    items
+    items,
+    addToCart
   } = props
 
   return (
@@ -15,6 +16,8 @@ const ItemList = props => {
             <li className="ItemList__item" key={i}>
               <Item
                 {...item}
+                btnLabel="カートに入れる"
+                onClickBtn={() => { addToCart(item) }}
               />
             </li>
           )
@@ -25,7 +28,8 @@ const ItemList = props => {
 }
 
 ItemList.propTypes = {
-  items: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+  items: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  addToCart: React.PropTypes.func.isRequired
 }
 
 export default ItemList

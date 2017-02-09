@@ -1,13 +1,39 @@
 import React from 'react'
-import './style.scss'
 
-import Item from './Item';
+import Item from '../Item'
 
-export default const Cart = () => {
+const Cart = props => {
+  const {
+    items,
+    removeFromCart
+  } = props
+
+  let cartContent
+  if(items.length !== 0) {
+    cartContent = items.map((item, i) => {
+      return (
+        <Item
+          key={i}
+          {...item}
+          btnLabel="カートから出す"
+          onClickBtn={() => { removeFromCart(i) }}
+        />
+      )
+    })
+  } else {
+    cartContent = <span>カートに商品がありません</span>
+  }
+
   return (
     <div className="Cart">
-      <Item/>
-      <Item/>
+      {cartContent}
     </div>
   )
 }
+
+Cart.propTypes = {
+  items: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  removeFromCart: React.PropTypes.func.isRequired
+}
+
+export default Cart
