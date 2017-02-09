@@ -1,29 +1,31 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import './style.scss'
+import data from './data'
 
-export default class HelloWorld extends Component {
+import Container from './components/Container'
+
+export default class App extends Component {
   constructor() {
     super()
   }
 
   render() {
-    const {target} = this.props
+    const {listItems} = this.props
+
     return (
       <div>
-        <h1>{target}</h1>
+        <Container
+          listItems = {listItems}
+        />
       </div>
     )
   }
 }
 
-HelloWorld.defaultProps = {
-  target: 'HelloWorld!'
-}
-
-HelloWorld.propTypes = {
-  target: React.PropTypes.string
+App.propTypes = {
+  listItems: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
 }
 
 const app = document.getElementById('app')
-ReactDOM.render(<HelloWorld/>, app)
+ReactDOM.render(<App listItems={data} />, app)
